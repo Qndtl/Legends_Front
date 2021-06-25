@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+//import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Main from './Screens/Main';
+import Header from './Components/Header';
+import SearchResult from './Screens/SearchResult';
 
 function App() {
+  /* const { summoner, puuid } = useSelector(state => state.summoner)
+  console.log(summoner, puuid) */
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Main} />
+        <Route path='/result/:summoner'>
+          <Header />
+          <SearchResult />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
