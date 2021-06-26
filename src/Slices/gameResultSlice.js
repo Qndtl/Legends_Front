@@ -7,7 +7,7 @@ export const gameResultSlice = createSlice({
   },
   reducers: {
     setGameResult: (state, action) => {
-      state.gameResults = [...state.gameResults, ...action.payload.gameResults]
+      state.gameResults = action.payload.gameResults
     },
     resetGameResult: (state) => {
       state.gameResults = []

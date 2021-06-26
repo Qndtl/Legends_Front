@@ -1,18 +1,14 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "../Axios/axios";
-import { setSummoner } from "../Slices/summonerSlice";
 
 const Main = () => {
   const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const onValid = async (data) => {
     const { data: { summonerInfos } } = await axios.post('/summoner', { summoner: data.summoner });
-    dispatch(setSummoner({ summoner: summonerInfos.name, puuid: summonerInfos.puuid, id: summonerInfos.id }));
-    history.push(`/result/${data.summoner}`, { profileIconId: summonerInfos.profileIconId });
+    history.push(`/result/${data.summoner}`, { profileIconId: summonerInfos.profileIconId, puuid: summonerInfos.puuid, id: summonerInfos.id });
   }
 
   return (

@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "../Axios/axios";
 import { resetGameResult } from "../Slices/gameResultSlice";
-import { setSummoner } from "../Slices/summonerSlice";
 
 const Header = () => {
   const { register, handleSubmit } = useForm();
@@ -13,8 +12,7 @@ const Header = () => {
   const onValid = async data => {
     dispatch(resetGameResult());
     const { data: { summonerInfos } } = await axios.post('/summoner', { summoner: data.summoner });
-    dispatch(setSummoner({ summoner: summonerInfos.name, puuid: summonerInfos.puuid, id: summonerInfos.id }));
-    history.push(`/result/${data.summoner}`, { profileIconId: summonerInfos.profileIconId });
+    history.push(`/result/${data.summoner}`, { profileIconId: summonerInfos.profileIconId, puuid: summonerInfos.puuid, id: summonerInfos.id });
   }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">

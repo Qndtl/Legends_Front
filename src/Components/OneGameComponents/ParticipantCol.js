@@ -2,7 +2,6 @@ import "../../styles/ParticipantCol.css";
 import { useDispatch } from "react-redux";
 import axios from "../../Axios/axios";
 import { resetGameResult } from "../../Slices/gameResultSlice";
-import { setSummoner } from "../../Slices/summonerSlice";
 import { useHistory } from "react-router-dom";
 
 const ParticipantCol = ({ team }) => {
@@ -12,8 +11,7 @@ const ParticipantCol = ({ team }) => {
   const onClick = async (participant) => {
     dispatch(resetGameResult());
     const { data: { summonerInfos } } = await axios.post('/summoner', { summoner: participant.summonerName });
-    dispatch(setSummoner({ summoner: summonerInfos.name, puuid: summonerInfos.puuid, id: summonerInfos.id }));
-    history.push(`/result/${participant.summonerName}`, { profileIconId: summonerInfos.profileIconId });
+    history.push(`/result/${participant.summonerName}`, { profileIconId: summonerInfos.profileIconId, puuid: summonerInfos.puuid, id: summonerInfos.id });
   }
 
   return (

@@ -4,18 +4,20 @@ import axios from "../Axios/axios";
 import { setGameResult } from "../Slices/gameResultSlice";
 import OneGame from "./OneGame";
 
-const GameResultSection = () => {
+const GameResultSection = ({ setLoading }) => {
   const dispatch = useDispatch();
   const { matchId } = useSelector(state => state.matchId);
   const { gameResults } = useSelector(state => state.gameResult);
 
   useEffect(() => {
     const getGameResults = async () => {
+      setLoading(true);
       const { data: { gameResults } } = await axios.post('/matchresult', { matchIds: matchId });
       dispatch(setGameResult({ gameResults }));
+      setLoading(false);
     }
     getGameResults();
-  }, [dispatch, matchId])
+  }, [dispatch, matchId, setLoading])
 
   if (gameResults.length === 0) {
     return <div className="container-lg">
@@ -23,7 +25,6 @@ const GameResultSection = () => {
     </div>
   }
   if (gameResults.length !== 0) {
-    console.log(gameResults)
     return (
       <div className="container-lg">
         <div className="row row-cols row-cols-xl-2">

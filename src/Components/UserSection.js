@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import axios from "../Axios/axios";
 import Tier from "./Tier";
 
 const UserSection = ({ profileIconId }) => {
-  const { summoner, id } = useSelector(state => state.summoner);
   const [soloRank, setSoloRank] = useState(null);
   const [teamRank, setTeamRank] = useState(null);
-
+  const { state: { id }, pathname } = useLocation();
   useEffect(() => {
     const getLeague = async () => {
       const { data: { soloRankData, teamRankData } } = await axios.post('/league', { summonerId: id });
@@ -24,7 +23,7 @@ const UserSection = ({ profileIconId }) => {
         <div className="col d-flex justify-content-center align-items-center">
           <div className="my-4">
             <img className="img-fluid rounded-circle mb-2" style={{ width: "150px" }} src={`http://ddragon.leagueoflegends.com/cdn/11.13.1/img/profileicon/${profileIconId}.png`} alt={profileIconId} />
-            <h3><b>{summoner}</b></h3>
+            <h3><b>{pathname.split('result/')[1]}</b></h3>
           </div>
         </div>
         <div className="col d-flex justify-content-center align-items-center">
