@@ -28,6 +28,8 @@ const OneGameProfile = ({ gameResult, myParticipantIdx }) => {
   const rune2 = myInfo?.perks?.styles[1]?.style;
   const spell1 = myInfo?.summoner1Id;
   const spell2 = myInfo?.summoner2Id;
+
+  console.log(gameResult)
   return (
     <div className="col d-flex flex-column align-items-center justify-content-center m-0 p-0" style={{ height: "180px" }}>
       <h6 className={myInfo?.win ? "text-primary" : "text-danger"}>{myInfo?.win ? "승리" : "패배"}</h6>

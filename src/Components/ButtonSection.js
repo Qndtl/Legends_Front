@@ -1,4 +1,7 @@
-const ButtonSection = ({ start, setStart, loading }) => {
+import { useSelector } from "react-redux";
+
+const ButtonSection = ({ start, setStart }) => {
+  const { loading } = useSelector(state => state.gameResult);
   return (
     <div className="container-lg p-0 d-flex">
       <button className="btn btn-secondary border"
